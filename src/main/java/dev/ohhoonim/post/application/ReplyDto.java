@@ -1,7 +1,7 @@
 package dev.ohhoonim.post.application;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
-public record ReplyDto(Long replyId, String contents, LocalDateTime createdAt, String createdBy) {
+public record ReplyDto(Long replyId, String contents, Instant createdAt, String createdBy) {
 
 }

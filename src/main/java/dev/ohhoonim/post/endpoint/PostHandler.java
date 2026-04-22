@@ -10,6 +10,7 @@ import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.RouterFunctions;
 import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
+import dev.ohhoonim.components.CommonUtil;
 import dev.ohhoonim.post.application.PostService;
 
 @Component
@@ -47,6 +48,7 @@ class EndpointRouter {
                         builder -> builder.GET("/posts", handler.posts)
                                 .GET("/posts/{postId}", handler.post)
                                 .GET("/posts/{postId}/replies", handler.replies))
+                .filter(CommonUtil.defaultResponse())
                 .build();
     }
 }

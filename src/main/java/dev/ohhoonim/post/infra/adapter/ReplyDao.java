@@ -11,17 +11,17 @@ public class ReplyDao implements ReplyRepository {
 
 
     private final static List<ReplyEntity> replies = List.of(
-        new ReplyEntity(1l, 1L, "이게뭐야 1", LocalDateTime.now(), "matthew 1"),
-        new ReplyEntity(2l, 2L, "이게뭐야 2", LocalDateTime.now(), "matthew 2"),
-        new ReplyEntity(2l, 1L, "이게뭐야 2", LocalDateTime.now(), "matthew 2"),
-        new ReplyEntity(3l, 2L, "이게뭐야 3", LocalDateTime.now(), "matthew 3"),
-        new ReplyEntity(4l, 3L, "이게뭐야 4", LocalDateTime.now(), "matthew 4"),
-        new ReplyEntity(5l, 1L, "이게뭐야 5", LocalDateTime.now(), "matthew 5"),
-        new ReplyEntity(6l, 1L, "이게뭐야 6", LocalDateTime.now(), "matthew 6")
+        new ReplyEntity(1l, "01KPSRPEESJXJTVWFC6VN7MSAE", "이게뭐야 1", LocalDateTime.now(), "matthew 1"),
+        new ReplyEntity(2l, "01KPSRPEESJXJTVWFC6VN7MSAF", "이게뭐야 2", LocalDateTime.now(), "matthew 2"),
+        new ReplyEntity(2l, "01KPSRPEESJXJTVWFC6VN7MSAG", "이게뭐야 2", LocalDateTime.now(), "matthew 2"),
+        new ReplyEntity(3l, "01KPSRPEESJXJTVWFC6VN7MSAE", "이게뭐야 3", LocalDateTime.now(), "matthew 3"),
+        new ReplyEntity(4l, "01KPSRPEESJXJTVWFC6VN7MSAE", "이게뭐야 4", LocalDateTime.now(), "matthew 4"),
+        new ReplyEntity(5l, "01KPSRPEESJXJTVWFC6VN7MSAE", "이게뭐야 5", LocalDateTime.now(), "matthew 5"),
+        new ReplyEntity(6l, "01KPSRPEESJXJTVWFC6VN7MSAE", "이게뭐야 6", LocalDateTime.now(), "matthew 6")
     );
 
     @Override
-    public List<ReplyEntity> repliesByPostId(Long postId) {
+    public List<ReplyEntity> repliesByPostId(String postId) {
         return replies.stream().filter(r -> r.getPostId().equals(postId)).toList();
     }
 
@@ -33,7 +33,7 @@ public class ReplyDao implements ReplyRepository {
     }
 
     @Override
-    public Optional<ReplyEntity> findById(Long id) {
+    public Optional<ReplyEntity> findById(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }

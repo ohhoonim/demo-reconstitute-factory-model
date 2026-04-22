@@ -4,7 +4,7 @@ import java.util.List;
 import dev.ohhoonim.components.annotation.JpaRepository;
 import dev.ohhoonim.post.infra.adapter.ReplyEntity;
 
-public interface ReplyRepository extends JpaRepository<ReplyEntity, Long>{
+public interface ReplyRepository extends JpaRepository<ReplyEntity, String>{
     
-    List<ReplyEntity> repliesByPostId(Long postId);
+    List<ReplyEntity> repliesByPostId(String postId);
 }

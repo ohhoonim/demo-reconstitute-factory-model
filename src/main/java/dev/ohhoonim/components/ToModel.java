@@ -1,4 +1,4 @@
-package dev.ohhoonim.components.model;
+package dev.ohhoonim.components;
 
 public interface ToModel<S> {
 

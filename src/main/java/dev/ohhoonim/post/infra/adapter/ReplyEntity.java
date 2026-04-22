@@ -6,14 +6,14 @@ import dev.ohhoonim.components.annotation.Entity;
 @Entity
 public class ReplyEntity  {
     private Long replyId; 
-    private Long postId; 
+    private String postId; 
     private String contents; 
     private LocalDateTime createdAt;
     private String createdBy;
 
     public ReplyEntity() {}
 
-    public ReplyEntity(Long replyId, Long postId, String contents, LocalDateTime createdAt,
+    public ReplyEntity(Long replyId, String postId, String contents, LocalDateTime createdAt,
             String createdBy) {
         this.replyId = replyId;
         this.postId = postId;
@@ -30,11 +30,11 @@ public class ReplyEntity  {
         this.replyId = replyId;
     }
 
-    public Long getPostId() {
+    public String getPostId() {
         return postId;
     }
 
-    public void setPostId(Long postId) {
+    public void setPostId(String postId) {
         this.postId = postId;
     }
 

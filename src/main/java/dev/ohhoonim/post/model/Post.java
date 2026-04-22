@@ -1,38 +1,36 @@
 package dev.ohhoonim.post.model;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import dev.ohhoonim.components.annotation.AggregateRoot;
+import dev.ohhoonim.components.model.unit.BaseEntity;
 
 @AggregateRoot
-public class Post {
-    private EntityId postId;
+public class Post extends BaseEntity<PostId> {
     private PostStatus status;
     private String title;
     private String contents;
-    private Audit audit;
 
     private List<Reply> replies;
 
-    public Post() { }
-
-    public Post(EntityId postId, String operator) {
-        this.postId = postId;
-        this.audit = new Audit(LocalDateTime.now(), operator, null, null);
+    public Post(PostId postId, String operator) {
+        super(postId, operator);
     }
 
-    private Post(EntityId postId, String title, String contents, Audit audit, List<Reply> replies) {
-        this.postId = postId;
+    private Post(PostId postId, String title, String contents, Instant createdAt, String createdBy,
+            Instant modifiedAt, String modifiedBy, List<Reply> replies) {
+        super(postId, createdAt, createdBy, modifiedAt, modifiedBy);
         this.title = title;
         this.contents = contents;
-        this.audit = audit;
         this.replies = replies;
     }
 
-    public static Post reconsitute(EntityId postId, String title, String contents, Audit audit) {
-        return new Post(postId, title, contents, audit, null);
+    public static Post reconsitute(PostId postId, String title, String contents, Instant createdAt,
+            String createdBy, Instant modifiedAt, String modifiedBy) {
+        return new Post(postId, title, contents, createdAt, createdBy, modifiedAt, modifiedBy,
+                null);
     }
 
     public void transition(PostTransitionEvent event, PostTransitionPolicy policy) {
@@ -56,10 +54,6 @@ public class Post {
         return Collections.unmodifiableList(this.replies);
     }
 
-    public EntityId postId() {
-        return this.postId;
-    }
-
     public String title() {
         return this.title;
     }
@@ -67,10 +61,6 @@ public class Post {
 
     public String contents() {
         return this.contents;
-    }
-
-    public Audit audit() {
-        return this.audit;
     }
 
     public PostStatus getStatus() {
