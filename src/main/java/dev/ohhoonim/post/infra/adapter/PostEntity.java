@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import dev.ohhoonim.components.ToModel;
 import dev.ohhoonim.components.annotation.Entity;
-import dev.ohhoonim.post.model.Audit;
-import dev.ohhoonim.post.model.PostId;
 import dev.ohhoonim.post.model.Post;
+import dev.ohhoonim.post.model.PostComponent.PostMeta;
+import dev.ohhoonim.post.model.PostId;
 
 @Entity
 public class PostEntity implements ToModel<Post> {
@@ -14,32 +14,40 @@ public class PostEntity implements ToModel<Post> {
     private String postId;
     private String title;
     private String contents;
-    private LocalDateTime createdAt; 
+    private String tags;
+    private String permanentLink;
+    private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime modifiedAt;
     private String modifedBy;
 
     public PostEntity() {}
 
-    public PostEntity(String postId, String title, String contents, LocalDateTime createdAt,
-            String createdBy, LocalDateTime modifiedAt, String modifedBy) {
+    public PostEntity(String postId, String title, String contents, String tags,
+            String permanentLink, LocalDateTime createdAt, String createdBy,
+            LocalDateTime modifiedAt, String modifedBy) {
         this.postId = postId;
         this.title = title;
         this.contents = contents;
+        this.tags = tags;
+        this.permanentLink = permanentLink;
         this.createdAt = createdAt;
         this.createdBy = createdBy;
         this.modifiedAt = modifiedAt;
         this.modifedBy = modifedBy;
     }
 
+
+
     @Override
     public Post toModel(Post post) {
         if (post == null) {
             post = new Post(PostId.Creator.from(this.postId), this.createdBy);
         }
-        return Post.reconsitute(post.getId(), title, contents, 
-            createdAt.toInstant(ZoneOffset.UTC), createdBy, 
-            this.getModifiedAt().toInstant(ZoneOffset.UTC), modifedBy);
+        var meta = new PostMeta(tags, permanentLink);
+        return Post.reconsitute(post.getId(), title, contents, meta,
+                createdAt.toInstant(ZoneOffset.UTC), createdBy,
+                this.getModifiedAt().toInstant(ZoneOffset.UTC), modifedBy);
     }
 
     public String getPostId() {
@@ -83,7 +91,7 @@ public class PostEntity implements ToModel<Post> {
     }
 
     public LocalDateTime getModifiedAt() {
-        return this.modifiedAt == null ? getCreatedAt(): this.modifiedAt;
+        return this.modifiedAt == null ? getCreatedAt() : this.modifiedAt;
     }
 
     public void setModifiedAt(LocalDateTime modifiedAt) {
@@ -98,6 +106,20 @@ public class PostEntity implements ToModel<Post> {
         this.modifedBy = modifedBy;
     }
 
-    
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public String getPermanentLink() {
+        return permanentLink;
+    }
+
+    public void setPermanentLink(String permanentLink) {
+        this.permanentLink = permanentLink;
+    }
 
 }

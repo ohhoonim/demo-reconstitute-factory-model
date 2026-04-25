@@ -11,9 +11,9 @@ import dev.ohhoonim.post.activity.out.PostRepository;
 public class PostDao implements PostRepository {
 
     private final static List<PostEntity> posts = List.of(
-        new PostEntity("01KPSRPEESJXJTVWFC6VN7MSAE", "title1", "contents 1", LocalDateTime.now(), "matthew", null, null),
-        new PostEntity("01KPSRPEESJXJTVWFC6VN7MSAF", "title2", "contents 2", LocalDateTime.now(), "alison", null, null),
-        new PostEntity("01KPSRPEESJXJTVWFC6VN7MSAG", "title3", "contents 3", LocalDateTime.now(), "ohhoonim", null, null)
+        new PostEntity("01KPSRPEESJXJTVWFC6VN7MSAE", "title1", "contents 1","tag1", "permLink1", LocalDateTime.now(), "matthew", null, null),
+        new PostEntity("01KPSRPEESJXJTVWFC6VN7MSAF", "title2", "contents 2","tag1", "permLink2", LocalDateTime.now(), "alison", null, null),
+        new PostEntity("01KPSRPEESJXJTVWFC6VN7MSAG", "title3", "contents 3","tag3", "permLink3", LocalDateTime.now(), "ohhoonim", null, null)
     );
 
     @Override

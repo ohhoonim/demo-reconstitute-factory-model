@@ -31,7 +31,7 @@ public class PostEventTest {
     void post_Draft_event() {
         var post = new Post(PostId.Creator.generate(), "system");
 
-        var beforePosted = Post.reconsitute(post.getId(), "title1", "contents 1", Instant.now(), "matthew", Instant.now(), "matthew");
+        var beforePosted = Post.reconsitute(post.getId(), "title1", "contents 1", null, Instant.now(), "matthew", Instant.now(), "matthew");
         beforePosted.setStatus(new PostStatus.None());
 
         // 임시 저장 데이터를 별도 버전관리 테이블에 저장할 수 도 있다.

@@ -6,12 +6,14 @@ import java.util.Collections;
 import java.util.List;
 import dev.ohhoonim.components.annotation.AggregateRoot;
 import dev.ohhoonim.components.model.unit.BaseEntity;
+import dev.ohhoonim.post.model.PostComponent.PostMeta;
 
 @AggregateRoot
 public class Post extends BaseEntity<PostId> {
     private PostStatus status;
     private String title;
     private String contents;
+    private PostMeta meta;
 
     private List<Reply> replies;
 
@@ -19,17 +21,18 @@ public class Post extends BaseEntity<PostId> {
         super(postId, operator);
     }
 
-    private Post(PostId postId, String title, String contents, Instant createdAt, String createdBy,
+    private Post(PostId postId, String title, String contents, PostMeta meta, Instant createdAt, String createdBy,
             Instant modifiedAt, String modifiedBy, List<Reply> replies) {
         super(postId, createdAt, createdBy, modifiedAt, modifiedBy);
         this.title = title;
         this.contents = contents;
+        this.meta = meta;
         this.replies = replies;
     }
 
-    public static Post reconsitute(PostId postId, String title, String contents, Instant createdAt,
+    public static Post reconsitute(PostId postId, String title, String contents, PostMeta meta, Instant createdAt,
             String createdBy, Instant modifiedAt, String modifiedBy) {
-        return new Post(postId, title, contents, createdAt, createdBy, modifiedAt, modifiedBy,
+        return new Post(postId, title, contents, meta, createdAt, createdBy, modifiedAt, modifiedBy,
                 null);
     }
 
@@ -65,5 +68,9 @@ public class Post extends BaseEntity<PostId> {
 
     public PostStatus getStatus() {
         return this.status;
+    }
+
+    public PostMeta meta() {
+        return this.meta;
     }
 }
