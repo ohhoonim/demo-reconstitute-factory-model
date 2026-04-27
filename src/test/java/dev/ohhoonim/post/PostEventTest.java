@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import com.github.f4b6a3.ulid.UlidCreator;
 import dev.ohhoonim.components.model.state.PostAction;
 import dev.ohhoonim.post.model.Post;
 import dev.ohhoonim.post.model.PostId;
@@ -31,7 +30,7 @@ public class PostEventTest {
     void post_Draft_event() {
         var post = new Post(PostId.Creator.generate(), "system");
 
-        var beforePosted = Post.reconsitute(post.getId(), "title1", "contents 1", null, Instant.now(), "matthew", Instant.now(), "matthew");
+        var beforePosted = Post.reconsitute(post.getId(), null, "title1", "contents 1", null, Instant.now(), "matthew", Instant.now(), "matthew");
         beforePosted.setStatus(new PostStatus.None());
 
         // 임시 저장 데이터를 별도 버전관리 테이블에 저장할 수 도 있다.

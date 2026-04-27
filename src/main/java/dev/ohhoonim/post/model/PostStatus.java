@@ -11,8 +11,6 @@ import dev.ohhoonim.post.model.PostTransitionEvent.Save;
 public sealed interface PostStatus extends Status<PostStatus, PostTransitionEvent, Post> permits Published, InProgress, None {
 
     public record None() implements PostStatus {
-        // 최초 Post 저장시 임시로 사용하는 Status이다. 
-        // Service에서 None 으로 세팅하고 진행하면 된다.
         @Override
         public TransitionResult<PostStatus, Post> trigger(PostTransitionEvent event) {
             return switch(event) {
@@ -24,7 +22,6 @@ public sealed interface PostStatus extends Status<PostStatus, PostTransitionEven
 
     }
     public record Published() implements PostStatus{
-
         @Override
         public TransitionResult<PostStatus, Post> trigger(PostTransitionEvent event) {
             return switch(event) {
@@ -34,7 +31,6 @@ public sealed interface PostStatus extends Status<PostStatus, PostTransitionEven
         }}
 
     public record InProgress() implements PostStatus{
-
         @Override
         public TransitionResult<PostStatus, Post> trigger(PostTransitionEvent event) {
             return switch(event) {
@@ -45,11 +41,16 @@ public sealed interface PostStatus extends Status<PostStatus, PostTransitionEven
         }
     }
 
-    public default PostStatus valueOf(String status) {
+    public static PostStatus valueOf(String status) {
         return switch(status) {
+            case "NONE" -> new None();
             case "PUBLISHED" -> new Published();
             case "INPROGRESS" -> new InProgress();
             default -> throw new RuntimeException("처리할 수 없는 상태 정보입니다.");
         };
+    }
+
+    public default String toValue() {
+        return this.getClass().getSimpleName().toUpperCase();    
     }
 }

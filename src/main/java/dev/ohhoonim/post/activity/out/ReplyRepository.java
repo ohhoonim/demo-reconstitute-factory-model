@@ -1,10 +1,13 @@
 package dev.ohhoonim.post.activity.out;
 
 import java.util.List;
-import dev.ohhoonim.components.annotation.JpaRepository;
-import dev.ohhoonim.post.infra.adapter.ReplyEntity;
+import dev.ohhoonim.post.model.Reply;
 
-public interface ReplyRepository extends JpaRepository<ReplyEntity, String>{
+public interface ReplyRepository {
     
-    List<ReplyEntity> repliesByPostId(String postId);
+    List<Reply> repliesByPostId(String postId);
+
+    void saveReply(Reply reply);
+
+    Long addReply(Reply reply);
 }

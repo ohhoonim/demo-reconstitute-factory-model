@@ -1,8 +1,14 @@
 package dev.ohhoonim.post.activity.out;
 
-import dev.ohhoonim.components.annotation.JpaRepository;
-import dev.ohhoonim.post.infra.adapter.PostEntity;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import dev.ohhoonim.post.model.PostComponent;
 
-public interface PostRepository extends JpaRepository<PostEntity, String> {
+public interface PostRepository {
+
+    List<Map<String, Object>> findAll(List<Class<? extends PostComponent>> columnTypes);
+
+    Optional<Map<String, Object>> findById(String value, List<Class<? extends PostComponent>> columnTypes);
     
 }

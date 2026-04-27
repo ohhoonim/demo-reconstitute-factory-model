@@ -21,18 +21,19 @@ public class Post extends BaseEntity<PostId> {
         super(postId, operator);
     }
 
-    private Post(PostId postId, String title, String contents, PostMeta meta, Instant createdAt, String createdBy,
+    private Post(PostId postId, PostStatus status, String title, String contents, PostMeta meta, Instant createdAt, String createdBy,
             Instant modifiedAt, String modifiedBy, List<Reply> replies) {
         super(postId, createdAt, createdBy, modifiedAt, modifiedBy);
+        this.status = status;
         this.title = title;
         this.contents = contents;
         this.meta = meta;
         this.replies = replies;
     }
 
-    public static Post reconsitute(PostId postId, String title, String contents, PostMeta meta, Instant createdAt,
+    public static Post reconsitute(PostId postId, PostStatus status, String title, String contents, PostMeta meta, Instant createdAt,
             String createdBy, Instant modifiedAt, String modifiedBy) {
-        return new Post(postId, title, contents, meta, createdAt, createdBy, modifiedAt, modifiedBy,
+        return new Post(postId, status, title, contents, meta, createdAt, createdBy, modifiedAt, modifiedBy,
                 null);
     }
 
